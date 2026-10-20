@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reporte Ciudadano · Tu ciudad, tu voz, tu cambio</title>
+<meta name="description" content="Reporta problemas urbanos en tu ciudad y haz seguimiento a tus reportes.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Logo reutilizable (lupa con edificios) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 64 64">
+    <circle cx="26" cy="26" r="20" fill="#eaf3ff" stroke="#1a5fd1" stroke-width="5"/>
+    <rect x="15" y="26" width="7" height="14" rx="1" fill="#1a5fd1"/>
+    <rect x="23" y="17" width="8" height="23" rx="1" fill="#16a265"/>
+    <rect x="32" y="23" width="7" height="17" rx="1" fill="#1a5fd1"/>
+    <line x1="41" y1="41" x2="58" y2="58" stroke="#16a265" stroke-width="7" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<header class="nav">
+  <div class="container nav-in">
+    <a href="#inicio" class="brand"><svg class="logo"><use href="#logo"/></svg><span>Reporte Ciudadano</span></a>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    <nav id="menu" class="menu">
+      <a href="#inicio">Inicio</a>
+      <a href="#como">Cómo funciona</a>
+      <a href="#problemas">Tipos de problemas</a>
+      <a href="#mejorar">Mejorar la ciudad</a>
+      <a href="#seguimiento">Seguimiento</a>
+      <button class="btn btn-green" data-report>Reportar un problema</button>
+      <a class="btn btn-outline" href="https://wa.me/59172981122?text=Hola%2C%20quiero%20obtener%20informaci%C3%B3n%20sobre%20Reporte%20Ciudadano." target="_blank" rel="noopener">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- PORTADA -->
+<section id="inicio" class="hero">
+  <div class="container hero-in">
+    <div class="hero-text">
+      <span class="chip">🇧🇴 Para los habitantes de Bolivia</span>
+      <h1>Tu ciudad, tu voz, tu cambio.</h1>
+      <p>Contribuye a mejorar tu entorno: reporta calles dañadas, basura, luminarias apagadas, fugas de agua y más, y haz seguimiento a cada reporte con un código.</p>
+      <div class="actions">
+        <button class="btn btn-green btn-lg" data-report>Reportar un problema</button>
+        <a class="btn btn-light btn-lg" href="#como">Cómo funciona</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section id="como" class="section">
+  <div class="container">
+    <h2>Cómo funciona</h2>
+    <p class="sub">Cuatro pasos sencillos para cualquier ciudadano.</p>
+    <div class="grid g4">
+      <div class="card step"><span class="num">1</span><div class="ico">👀</div><h3>Identifica un problema</h3><p>Observa un problema urbano en tu barrio o ciudad.</p></div>
+      <div class="card step"><span class="num">2</span><div class="ico">📝</div><h3>Registra la información</h3><p>Describe el problema y marca su ubicación.</p></div>
+      <div class="card step"><span class="num">3</span><div class="ico">🔑</div><h3>Recibe tu código</h3><p>Se genera un código único de seguimiento.</p></div>
+      <div class="card step"><span class="num">4</span><div class="ico">📍</div><h3>Consulta el estado</h3><p>Revisa las actualizaciones de tu reporte.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMAS -->
+<section id="problemas" class="section alt">
+  <div class="container">
+    <h2>¿Qué problemas puedes reportar?</h2>
+    <p class="sub">Elige una categoría y el formulario se abrirá listo para completar.</p>
+    <div class="grid g4" id="catGrid"></div>
+  </div>
+</section>
+
+<!-- MEJORAR LA CIUDAD -->
+<section id="mejorar" class="section">
+  <div class="container">
+    <h2>Pequeñas acciones generan grandes cambios.</h2>
+    <p class="sub">Toca una tarjeta para conocer más.</p>
+    <div class="grid g4" id="impGrid"></div>
+    <div class="panel" id="impPanel" aria-live="polite">
+      <svg viewBox="0 0 220 140" class="panel-ill" aria-hidden="true">
+        <rect width="220" height="140" rx="14" fill="#e6f1ff"/>
+        <circle cx="180" cy="28" r="14" fill="#ffd166"/>
+        <rect x="20" y="50" width="34" height="70" fill="#1a5fd1"/><rect x="58" y="30" width="40" height="90" fill="#3b82f6"/>
+        <rect x="102" y="60" width="32" height="60" fill="#1a5fd1"/>
+        <g fill="#fff"><rect x="26" y="58" width="6" height="6"/><rect x="40" y="58" width="6" height="6"/><rect x="66" y="40" width="6" height="6"/><rect x="80" y="40" width="6" height="6"/><rect x="66" y="58" width="6" height="6"/><rect x="80" y="58" width="6" height="6"/></g>
+        <circle cx="160" cy="95" r="14" fill="#16a265"/><rect x="157" y="105" width="6" height="16" fill="#7a4b21"/>
+        <rect x="0" y="120" width="220" height="20" fill="#4b5563"/><rect x="10" y="129" width="30" height="3" fill="#fff"/><rect x="60" y="129" width="30" height="3" fill="#fff"/><rect x="110" y="129" width="30" height="3" fill="#fff"/>
+      </svg>
+      <div>
+        <h3 id="impTitle"></h3>
+        <p id="impText"></p>
+        <button class="btn btn-green" data-report>Crear un reporte</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEGUIMIENTO -->
+<section id="seguimiento" class="section alt">
+  <div class="container narrow">
+    <h2>Seguimiento de reportes</h2>
+    <p class="sub">Introduce tu código para consultar el estado de tu reporte.</p>
+    <form id="trackForm" class="track-form">
+      <input id="trackCode" type="text" placeholder="Ej: RC-20261020-ABC123" aria-label="Código de seguimiento" required>
+      <button class="btn btn-blue" type="submit">Consultar reporte</button>
+    </form>
+    <div id="trackResult"></div>
+    <p class="note">ℹ️ Los estados guardados en tu navegador son <b>demostrativos</b>. Las actualizaciones institucionales reales requieren un servidor (backend) o una integración autorizada con las instituciones.</p>
+  </div>
+</section>
+
+<!-- PERFIL -->
+<section id="perfil" class="section">
+  <div class="container narrow">
+    <h2>Tu perfil local</h2>
+    <p class="sub">Guarda tus datos para no escribirlos cada vez. Sin contraseñas.</p>
+    <form id="profileForm" class="card form-card">
+      <label>Nombre<input id="pName" type="text" autocomplete="name"></label>
+      <label>Teléfono (opcional)<input id="pPhone" type="tel" autocomplete="tel"></label>
+      <label>Correo electrónico (opcional)<input id="pEmail" type="email" autocomplete="email"></label>
+      <div class="actions"><button class="btn btn-blue" type="submit">Guardar perfil</button><button class="btn btn-outline-dark" type="button" id="pClear">Borrar perfil</button></div>
+      <p class="note" id="pMsg">El perfil es local: no es una cuenta institucional ni se sincroniza entre dispositivos.</p>
+    </form>
+  </div>
+</section>
+
+<!-- INSTITUCIONES Y MODELO -->
+<section id="instituciones" class="section alt">
+  <div class="container">
+    <h2>Instituciones y modelo de negocio</h2>
+    <p class="sub">Según la competencia correspondiente y mediante acuerdos, los reportes podrían derivarse a las instituciones responsables de los servicios urbanos. Actualmente no existen convenios ni conexión institucional.</p>
+    <div class="grid g4">
+      <div class="card"><div class="ico">🏛️</div><h3>Licencias</h3><p>Licencias de uso para gobiernos municipales.</p></div>
+      <div class="card"><div class="ico">🛠️</div><h3>Implementación</h3><p>Personalización para instituciones.</p></div>
+      <div class="card"><div class="ico">📊</div><h3>Paneles</h3><p>Paneles administrativos y reportes estadísticos agregados.</p></div>
+      <div class="card"><div class="ico">🤝</div><h3>Soporte</h3><p>Soporte técnico y mantenimiento.</p></div>
+    </div>
+    <p class="note center">✅ El registro y envío de reportes ciudadanos básicos seguirá siendo <b>gratuito</b>.</p>
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section id="beneficios" class="section">
+  <div class="container">
+    <h2>Beneficios esperados</h2>
+    <p class="sub">Objetivos del proyecto, no resultados oficiales ya demostrados.</p>
+    <div class="grid g5">
+      <div class="card"><div class="ico">💬</div><h3>Comunicación</h3><p>Facilita la comunicación ciudadana.</p></div>
+      <div class="card"><div class="ico">🗂️</div><h3>Orden</h3><p>Organiza la información sobre problemas urbanos.</p></div>
+      <div class="card"><div class="ico">🔎</div><h3>Consulta</h3><p>Permite consultar el estado de los reportes registrados.</p></div>
+      <div class="card"><div class="ico">🗺️</div><h3>Zonas</h3><p>Ayuda a identificar zonas que requieren atención.</p></div>
+      <div class="card"><div class="ico">🙌</div><h3>Participación</h3><p>Promueve la participación ciudadana.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer" id="contacto">
+  <div class="container foot-grid">
+    <div>
+      <a href="#inicio" class="brand light"><svg class="logo"><use href="#logo"/></svg><span>Reporte Ciudadano</span></a>
+      <p>Plataforma ciudadana para reportar y dar seguimiento a problemas urbanos.</p>
+      <a class="btn btn-green" href="https://wa.me/59172981122?text=Hola%2C%20quiero%20obtener%20informaci%C3%B3n%20sobre%20Reporte%20Ciudadano." target="_blank" rel="noopener">Contacto por WhatsApp</a>
+    </div>
+    <div class="flinks"><b>Secciones</b>
+      <a href="#como">Cómo funciona</a><a href="#problemas">Tipos de problemas</a><a href="#mejorar">Mejorar la ciudad</a><a href="#seguimiento">Seguimiento</a><a href="#perfil">Perfil</a>
+    </div>
+    <div>
+      <b>Privacidad</b>
+      <p class="small">Tus datos y reportes se guardan solo en tu navegador (LocalStorage). Al enviar por WhatsApp, el mensaje se comparte con ese servicio. No pedimos contraseñas.</p>
+      <p class="small">⚠️ Este prototipo todavía no está conectado a una base de datos institucional.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL REPORTE -->
+<div class="modal" id="reportModal" role="dialog" aria-modal="true" aria-labelledby="rTitle" hidden>
+  <div class="modal-box">
+    <button class="close" data-close aria-label="Cerrar">✕</button>
+    <h2 id="rTitle">Reportar un problema</h2>
+    <form id="reportForm" novalidate>
+      <label>Nombre del ciudadano *<input id="rName" required maxlength="80" autocomplete="name"></label>
+      <label>Número de contacto<input id="rPhone" type="tel" maxlength="20" placeholder="Opcional" autocomplete="tel"></label>
+      <label>Tipo de problema *<select id="rCat" required></select></label>
+      <label>Descripción detallada *<textarea id="rDesc" rows="4" required minlength="10" maxlength="600"></textarea></label>
+      <label>Ubicación del problema *<input id="rLoc" required maxlength="200" placeholder="Calle, barrio, referencia o coordenadas"></label>
+      <button type="button" class="btn btn-outline-dark" id="gpsBtn">📍 Usar mi ubicación</button>
+      <small id="gpsMsg" class="hint"></small>
+      <label>Fotografía (opcional)<input id="rPhoto" type="file" accept="image/*"></label>
+      <small id="photoName" class="hint">Ninguna foto seleccionada. La foto no se adjunta automáticamente a WhatsApp.</small>
+      <small class="hint">Fecha de registro: <b id="rDate"></b> (automática)</small>
+      <div id="rErr" class="err" role="alert"></div>
+      <button class="btn btn-green btn-lg" type="submit" id="sendBtn">Enviar reporte</button>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL CONFIRMACIÓN -->
+<div class="modal" id="okModal" role="dialog" aria-modal="true" hidden>
+  <div class="modal-box center">
+    <button class="close" data-close aria-label="Cerrar">✕</button>
+    <div class="big">✅</div>
+    <h2>Reporte guardado</h2>
+    <p>Tu código de seguimiento es:</p>
+    <div class="code" id="okCode"></div>
+    <p class="small">Guárdalo para consultar tu reporte. Se abrió WhatsApp con el mensaje preparado: <b>debes confirmar el envío dentro de WhatsApp</b>; aún no se ha enviado.</p>
+    <div class="actions c">
+      <a class="btn btn-green" id="okWa" target="_blank" rel="noopener">Abrir WhatsApp de nuevo</a>
+      <button class="btn btn-outline-dark" id="okTrack">Ver seguimiento</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
